@@ -19,7 +19,7 @@ pip install --upgrade pip
 uv pip install comfy-cli
 
 # Initialize ComfyUI layout correctly via native installer to build local directory pathing
-#comfy --skip-prompt install --nvidia
+comfy --skip-prompt install --nvidia
 
 # 4. Generate Directory Enforcements & Structural Symlinks                                                                                                                  echo "--- Mapping Directory Infrastructure ---"
 mkdir -p /workspace/.comfy/inputs
