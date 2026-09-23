@@ -29,7 +29,7 @@ COMFY="/workspace/ComfyUI"
 # --------------------------------------------------
 apt-get update
 apt-get install --no-install-recommends -y \
-    curl wget git fish ncdu ca-certificates
+    curl wget git fish ncdu ca-certificates lsd rustup
 
 # --------------------------------------------------
 # Activate Vast's existing Python environment
@@ -46,14 +46,20 @@ python -m pip install --upgrade comfy-cli || true
 # --------------------------------------------------
 # OpenCode / LM Studio headless
 # --------------------------------------------------
+npm install @openrouter/sdk
+npm install @openrouter/agent
+npm install @openai/codex@latest
+curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash || true
 curl -fsSL https://opencode.ai/install | bash || true
 curl -fsSL https://lmstudio.ai/install.sh | bash || true
 export PATH="/root/.local/bin:/root/.lmstudio/bin:/root/.opencode/bin:$PATH"
 
-# --------------------------------------------------
+# ------------------------------------------------
 # ComfyUI folders
-# --------------------------------------------------
+# ------------------------------------------------
+
 mkdir -p \
+    "$COMFY/models" \
     "$COMFY/input" \
     "$COMFY/output" \
     "$COMFY/models/checkpoints" \
@@ -62,6 +68,19 @@ mkdir -p \
     "$COMFY/models/llm/GGUF" \
     "$COMFY/user/default/workflows" \
     "$COMFY/custom_nodes"
+mkdir -p /workspace/.comfy/{inputs,outputs,workflows}
+rm -rf \
+    "$COMFY/input" \
+    "$COMFY/output" \
+    "$COMFY/models/workflows/" \
+    "$COMFY/user/default/workflows/"
+cd "/workspace/ComfyUI/"
+ln -s "/workspace/.comfy/inputs/ $COMFY/input"
+ln -s "/workspace/.comfy/outputs/ $COMFY/output"
+cd "/workspace/ComfyUI/models"
+ln -s "/workspace/.comfy/workflows/ $COMFY/models/workflows"
+cd "/workspace/ComfyUI/user/default/"
+ln -s "/workspace/.comfy/workflows/ $COMFY/user/default/workflows/"
 
 clone_if_missing() {
     URL="$1"
