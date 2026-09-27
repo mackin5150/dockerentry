@@ -29,7 +29,7 @@ COMFY="/workspace/ComfyUI"
 # --------------------------------------------------
 apt-get update
 apt-get install --no-install-recommends -y \
-    curl wget git fish ncdu ca-certificates lsd rustup
+    curl wget git fish ncdu ca-certificates lsd rustup nala neovim
 
 # --------------------------------------------------
 # Activate Vast's existing Python environment
@@ -69,19 +69,6 @@ mkdir -p \
     "$COMFY/user/default/workflows" \
     "$COMFY/custom_nodes"
 mkdir -p /workspace/.comfy/{inputs,outputs,workflows}
-rm -rf \
-    "$COMFY/input" \
-    "$COMFY/output" \
-    "$COMFY/models/workflows/" \
-    "$COMFY/user/default/workflows/"
-cd "/workspace/ComfyUI/"
-ln -s "/workspace/.comfy/inputs/ $COMFY/input"
-ln -s "/workspace/.comfy/outputs/ $COMFY/output"
-cd "/workspace/ComfyUI/models"
-ln -s "/workspace/.comfy/workflows/ $COMFY/models/workflows"
-cd "/workspace/ComfyUI/user/default/"
-ln -s "/workspace/.comfy/workflows/ $COMFY/user/default/workflows/"
-
 clone_if_missing() {
     URL="$1"
     DIR="$2"
