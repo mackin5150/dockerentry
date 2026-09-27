@@ -57,17 +57,6 @@ export PATH="/root/.local/bin:/root/.lmstudio/bin:/root/.opencode/bin:$PATH"
 # ------------------------------------------------
 # ComfyUI folders
 # ------------------------------------------------
-
-mkdir -p \
-    "$COMFY/models" \
-    "$COMFY/input" \
-    "$COMFY/output" \
-    "$COMFY/models/checkpoints" \
-    "$COMFY/models/clip" \
-    "$COMFY/models/vae" \
-    "$COMFY/models/llm/GGUF" \
-    "$COMFY/user/default/workflows" \
-    "$COMFY/custom_nodes"
 mkdir -p /workspace/.comfy/{inputs,outputs,workflows}
 clone_if_missing() {
     URL="$1"
@@ -115,6 +104,7 @@ download_model() {
         --output "$DEST" "$URL"
 }
 
+download_model ""
 download_model "https://huggingface.co/beznogim666/gonzalomo-krea-2/resolve/main/gonzalomoKrea2_v10.safetensors" "$COMFY/models/checkpoints/krea2.safetensors"
 download_model "https://huggingface.co/kkangnom/FLUX.2-klein-9B-Blitz-ComfyUI/resolve/main/DarkBeast-Klein9b-V2-BFS-FP8-ComfyUI.safetensors" "$COMFY/models/checkpoints/flux2_klein.safetensors"
 download_model "https://huggingface.co/Zillis/moodyPornMix/resolve/main/moodyPornMix/moodyPornMix_zitV9.safetensors" "$COMFY/models/checkpoints/z-image.safetensors"
