@@ -29,7 +29,7 @@ COMFY="/workspace/ComfyUI"
 # --------------------------------------------------
 apt-get update
 apt-get install --no-install-recommends -y \
-    curl wget git fish ncdu ca-certificates lsd rustup nala neovim
+    curl wget git fish ncdu ca-certificates lsd rustup nala neovim npm nodejs
 
 # --------------------------------------------------
 # Activate Vast's existing Python environment
@@ -106,17 +106,17 @@ download_model() {
 
 
 download_model "https://huggingface.co/beznogim666/gonzalomo-krea-2/resolve/main/gonzalomoKrea2_v10.safetensors" "$COMFY/models/checkpoints/krea2.safetensors"
-download_model "https://huggingface.co/kkangnom/FLUX.2-klein-9B-Blitz-ComfyUI/resolve/main/DarkBeast-Klein9b-V2-BFS-FP8-ComfyUI.safetensors" "$COMFY/models/checkpoints/flux2_klein.safetensors"
-download_model "https://huggingface.co/Zillis/moodyPornMix/resolve/main/moodyPornMix/moodyPornMix_zitV9.safetensors" "$COMFY/models/checkpoints/z-image.safetensors"
+download_model "https://huggingface.co/orcarouter/Qwen3.8-27B-Uncensored-GGUF/resolve/main/-F16-00001-of-00002.gguf" "$COMFY/models/llm/Qwen3.8-27B-Uncensored-01-of-02.gguf"
+download_model "https://huggingface.co/orcarouter/Qwen3.8-27B-Uncensored-GGUF/resolve/main/Qwen3.8-27B-Uncensored-F16-00002-of-00002.gguf" "$COMFY/models/llm/Qwen3.8-27B-Uncensored-02-of-02.gguf"
 download_model "https://huggingface.co/Phr00t/Qwen-Image-Edit-Rapid-AIO/resolve/main/v23/Qwen-Rapid-AIO-NSFW-v23.safetensors" "$COMFY/models/checkpoints/qwen-image.safetensors"
 download_model "https://huggingface.co/Phr00t/WAN2.2-14B-Rapid-AllInOne/resolve/main/Mega-v12/wan2.2-rapid-mega-aio-nsfw-v12.safetensors" "$COMFY/models/checkpoints/wan22_i2v.safetensors"
-download_model "https://huggingface.co/tripolskypetr/Qwen3VL-Uncensored-Aggressive-GGUF/resolve/main/Qwen3VL-8B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf" "$COMFY/models/llm/Qwen3VL-8B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf"
-download_model "https://huggingface.co/tripolskypetr/Qwen3VL-Uncensored-Aggressive-GGUF/resolve/main/Qwen3VL-8B-Uncensored-HauhauCS-Balanced-mmproj-f16.gguf" "$COMFY/models/llm/GGUF/Qwen3VL-8B-Uncensored-HauhauCS-Balanced-mmproj-f16.gguf"
+download_model "https://huggingface.co/orcarouter/Qwen3.8-27B-Uncensored-GGUF/resolve/main/mmproj-Qwen3.8-27B-Uncensored-f16.gguf" "$COMFY/models/llm/mmproj-Qwen3.8-27B-Uncensored-f16.gguf"
+download_model ""
 download_model "https://huggingface.co/zootkitty/nsfw_wan_umt5-xxl_bf16_fixed/resolve/main/nsfw_wan_umt5-xxl_bf16_fixed.safetensors" "$COMFY/models/clip/nsfw-umt5_xxl.safetensors"
 
 # --------------------------------------------------
 # LM Studio model
-# --------------------------------------------------
+# ------------------------------
 if command -v lms >/dev/null 2>&1; then
     lms daemon up || true
     lms get HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF || true
