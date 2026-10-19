@@ -76,6 +76,7 @@ clone_if_missing "https://github.com/slahiri/ComfyUI-Workflow-Models-Downloader.
 clone_if_missing "https://codeberg.org/Gourieff/comfyui-reactor-node.git" "comfyui-reactor-node"
 clone_if_missing "https://github.com/BenjaMITM/Enhanced-Civicomfy.git" "Enhanced-Civicomfy"
 clone_if_missing "https://github.com/huchukato/ComfyUI-QwenVL-Mod.git" "ComfyUI-QwenVL-Mod"
+clone_if_missing "https://github.com/mackin5150/OcclusionMask.git" "OcclusionMask"
 
 find "$COMFY/custom_nodes" -maxdepth 2 -name requirements.txt -print0 |
 while IFS= read -r -d '' req; do
