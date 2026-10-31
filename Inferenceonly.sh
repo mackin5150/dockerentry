@@ -289,14 +289,14 @@ download_model() {
 
 
 if [ "${LEGACY_MODELS:-1}" = "1" ]; then
-download_model "https://huggingface.co/beznogim666/gonzalomo-krea-2/resolve/main/gonzalomoKrea2_v10.safetensors" "$COMFY/models/checkpoints/krea2.safetensors"
+#download_model "https://huggingface.co/beznogim666/gonzalomo-krea-2/resolve/main/gonzalomoKrea2_v10.safetensors" "$COMFY/models/checkpoints/krea2.safetensors"
 download_model "https://huggingface.co/orcarouter/Qwen3.8-27B-Uncensored-GGUF/resolve/main/Qwen3.8-27B-Uncensored-F16-00001-of-00002.gguf" "$COMFY/models/llm/Qwen3.8-27B-Uncensored-01-of-02.gguf"
 download_model "https://huggingface.co/orcarouter/Qwen3.8-27B-Uncensored-GGUF/resolve/main/Qwen3.8-27B-Uncensored-F16-00002-of-00002.gguf" "$COMFY/models/llm/Qwen3.8-27B-Uncensored-02-of-02.gguf"
-download_model "https://huggingface.co/Phr00t/Qwen-Image-Edit-Rapid-AIO/resolve/main/v23/Qwen-Rapid-AIO-NSFW-v23.safetensors" "$COMFY/models/checkpoints/qwen-image.safetensors"
-download_model "https://huggingface.co/Phr00t/WAN2.2-14B-Rapid-AllInOne/resolve/main/Mega-v12/wan2.2-rapid-mega-aio-nsfw-v12.safetensors" "$COMFY/models/checkpoints/wan22_i2v.safetensors"
+#download_model "https://huggingface.co/Phr00t/Qwen-Image-Edit-Rapid-AIO/resolve/main/v23/Qwen-Rapid-AIO-NSFW-v23.safetensors" "$COMFY/models/checkpoints/qwen-image.safetensors"
+#download_model "https://huggingface.co/Phr00t/WAN2.2-14B-Rapid-AllInOne/resolve/main/Mega-v12/wan2.2-rapid-mega-aio-nsfw-v12.safetensors" "$COMFY/models/checkpoints/wan22_i2v.safetensors"
 download_model "https://huggingface.co/orcarouter/Qwen3.8-27B-Uncensored-GGUF/resolve/main/mmproj-Qwen3.8-27B-Uncensored-f16.gguf" "$COMFY/models/llm/mmproj-Qwen3.8-27B-Uncensored-f16.gguf"
 # Removed invalid `download_model ""` call present in original (crashed with set -u).
-download_model "https://huggingface.co/zootkitty/nsfw_wan_umt5-xxl_bf16_fixed/resolve/main/nsfw_wan_umt5-xxl_bf16_fixed.safetensors" "$COMFY/models/clip/nsfw-umt5_xxl.safetensors"
+#download_model "https://huggingface.co/zootkitty/nsfw_wan_umt5-xxl_bf16_fixed/resolve/main/nsfw_wan_umt5-xxl_bf16_fixed.safetensors" "$COMFY/models/clip/nsfw-umt5_xxl.safetensors"
 fi
 
 # --------------------------------------------------
