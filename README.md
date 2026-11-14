@@ -2,6 +2,29 @@
 
 Provisioning scripts for a Vast.ai ComfyUI environment.
 
+## ComfyUI persistent folders (startup)
+
+`provision.sh` now calls `scripts/startup_comfyui.sh` near the beginning, before model and custom-node setup. The script reproduces the persistent symlinks in the Vast.ai terminal setup:
+
+| ComfyUI path | Persistent target |
+| --- | --- |
+| `/workspace/ComfyUI/input` | `/workspace/.comfy/inputs` |
+| `/workspace/ComfyUI/output` | `/workspace/.comfy/outputs` |
+| `/workspace/ComfyUI/models/workflows` | `/workspace/.comfy/workflows` |
+| `/workspace/ComfyUI/user/default/workflows` | `/workspace/.comfy/workflows` |
+
+It is safe to rerun on each startup. Instead of `rm -rf`, it moves an existing folder aside, migrates items that do not conflict, and leaves duplicate-name items in a clearly named `.pre-persistence-...` backup. Check any backup messages before deleting backups manually. The `models/workflows` link follows the original setup; ComfyUI's user workflow location is `user/default/workflows`. Existing `user/__manager/config.ini` settings are not changed.
+
+To run it independently on an instance where the repo is cloned:
+
+```bash
+bash /workspace/dockerentry/scripts/startup_comfyui.sh
+```
+
+For every container restart, add that same command to your Vast instance's on-start command/script **before launching ComfyUI**. Running `provision.sh` once does not itself register an every-boot hook.
+
+Optional settings: `COMFY_PERSIST_LINKS=0` skips this step inside provisioning; `COMFY_DIR` and `COMFY_PERSIST_DIR` override the default locations when running the standalone script.
+
 ## Main script
 
 `provision.sh` runs the existing tool installs and ComfyUI custom-node setup, and now includes:
