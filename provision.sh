@@ -58,6 +58,32 @@ export PATH="/root/.local/bin:/root/.lmstudio/bin:/root/.opencode/bin:$PATH"
 # ComfyUI folders and custom nodes
 # --------------------------------------------------
 mkdir -p /workspace/.comfy/{inputs,outputs,workflows}
+# Configure persistent inputs, outputs and workflows before other ComfyUI setup.
+# Works with both a cloned repo and Vast's single-file provision.sh download.
+# Set COMFY_PERSIST_LINKS=0 to opt out for a particular provision run.
+if [ "${COMFY_PERSIST_LINKS:-1}" = "1" ]; then
+    COMFY_LINK_SCRIPT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/scripts/startup_comfyui.sh"
+    if [ ! -f "$COMFY_LINK_SCRIPT" ]; then
+        COMFY_LINK_SCRIPT="/tmp/dockerentry-startup-comfyui.sh"
+        if ! curl -fLsS --retry 3 \
+            "https://raw.githubusercontent.com/mackin5150/dockerentry/main/scripts/startup_comfyui.sh" \
+            -o "$COMFY_LINK_SCRIPT"; then
+            echo "[WARN] Could not fetch ComfyUI startup script; links not configured."
+            COMFY_LINK_SCRIPT=""
+        fi
+    fi
+    if [ -n "$COMFY_LINK_SCRIPT" ]; then
+        if COMFY_DIR="$COMFY" COMFY_PERSIST_DIR="${COMFY_PERSIST_DIR:-/workspace/.comfy}" \
+            bash "$COMFY_LINK_SCRIPT"; then
+            echo "[OK] Persistent ComfyUI paths configured."
+        else
+            echo "[WARN] ComfyUI path setup failed; check backups and permissions."
+        fi
+    fi
+else
+    echo "[SKIP] Persistent ComfyUI links disabled (COMFY_PERSIST_LINKS=0)"
+fi
+
 # Ensure both directories exist before attempting git clone/find.
 mkdir -p "$COMFY/custom_nodes" "$COMFY/models"
 clone_if_missing() {
