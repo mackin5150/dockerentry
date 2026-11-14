@@ -83,7 +83,8 @@ clone_if_missing "https://github.com/mackin5150/OcclusionMask.git" "OcclusionMas
 # New: discover compatible ONNX image-processing models in models/onnx/.
 clone_if_missing "https://github.com/theRealAi/ComfyUI-ONNX.git" "ComfyUI-ONNX"
 
-# Optional: clone_if_missing() {
+# Optional: 
+clone_if_missing() {
     URL="$1"
     DIR="$2"
     if [ ! -d "$WORKSPACE/$DIR/.git" ]; then
