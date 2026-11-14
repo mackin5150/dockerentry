@@ -435,6 +435,37 @@ else
     echo "[SKIP] Fish Git identity aliases already installed"
 fi
 
+# --------------------------------------------------
+# IOPaint (separate venv from ComfyUI, full built-in model/plugin set)
+# Set IOPAINT_INSTALL=0 to skip. Set IOPAINT_DOWNLOAD_SET=core
+# to download only the eight erase models on this provision run.
+# The full set is large and may stop at the free-space safety threshold.
+# --------------------------------------------------
+if [ "${IOPAINT_INSTALL:-1}" = "1" ]; then
+    PROVISION_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+    IOPAINT_SCRIPT="$PROVISION_DIR/scripts/install_iopaint.sh"
+    if [ ! -f "$IOPAINT_SCRIPT" ]; then
+        # Vast may invoke provision.sh as a lone downloaded file.
+        IOPAINT_SCRIPT="/tmp/dockerentry-install-iopaint.sh"
+        if ! curl -fLsS --retry 3 \
+            "https://raw.githubusercontent.com/mackin5150/dockerentry/main/scripts/install_iopaint.sh" \
+            -o "$IOPAINT_SCRIPT"; then
+            echo "[WARN] Could not retrieve IOPaint installer; skipping it."
+            IOPAINT_SCRIPT=""
+        fi
+    fi
+    if [ -n "$IOPAINT_SCRIPT" ]; then
+        if IOPAINT_DOWNLOAD_SET="${IOPAINT_DOWNLOAD_SET:-all}" bash "$IOPAINT_SCRIPT"; then
+            echo "[OK] IOPaint installed and model prefetch completed."
+        else
+            echo "[WARN] IOPaint installer reported an error; other provisioning steps are preserved."
+            echo "[WARN] Resume later: bash /workspace/dockerentry/scripts/install_iopaint.sh"
+        fi
+    fi
+else
+    echo "[SKIP] IOPaint installation disabled (IOPAINT_INSTALL=0)"
+fi
+
 echo "========================================"
 echo " Custom provisioning complete"
 echo "========================================"
