@@ -96,7 +96,7 @@ clone_if_missing() {
 }
 clone_if_missing "https://github.com/radareorg/radare2" "Radare2"
 clone_if_missing "https://github.com/LaurieWired/GhidraMCP" "GihidraMCP"
-
+clone_if_missing "https://github.com/Sanster/IOPaint.git" "IOPaint"
 #SimSwap/Ghost node. May conflict with ReActor dependencies;
 # deliberately disabled unless ENABLE_SIMSWAP_NODE=1 in Vast environment.
 if [ "${ENABLE_SIMSWAP_NODE:-0}" = "1" ]; then
