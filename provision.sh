@@ -29,7 +29,7 @@ COMFY="/workspace/ComfyUI"
 # --------------------------------------------------
 apt-get update
 apt-get install --no-install-recommends -y \
-    curl wget git fish ncdu ca-certificates lsd rustup nala neovim npm nodejs
+    curl wget git fish ncdu ca-certificates gh lsd rustup nala neovim npm nodejs
 
 # --------------------------------------------------
 # Activate Vast's existing Python environment
