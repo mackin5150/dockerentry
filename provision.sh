@@ -418,6 +418,23 @@ setup_fish_tools() {
 # Important: do not let shell-prompt setup crash GPU provisioning.
 setup_fish_tools || echo "[WARN] Fish extras had an unexpected failure; continuing"
 
+# --------------------------------------------------
+# Fish shortcuts for setting global Git identity
+# --------------------------------------------------
+FISH_CONFIG="$HOME/.config/fish/config.fish"
+mkdir -p "$(dirname "$FISH_CONFIG")"
+if ! grep -Fqx '# dockerentry: Git identity aliases' "$FISH_CONFIG" 2>/dev/null; then
+    cat >> "$FISH_CONFIG" <<'FISH'
+
+# dockerentry: Git identity aliases
+alias gu.n='git config --global user.name "mackin5150"'
+alias gu.e='git config --global user.email "mackin5150@github.com"'
+FISH
+    echo "[OK] Fish Git identity aliases installed: gu.n, gu.e"
+else
+    echo "[SKIP] Fish Git identity aliases already installed"
+fi
+
 echo "========================================"
 echo " Custom provisioning complete"
 echo "========================================"
