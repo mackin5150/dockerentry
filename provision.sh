@@ -46,8 +46,8 @@ python -m pip install --upgrade comfy-cli || true
 # --------------------------------------------------
 # OpenCode / LM Studio headless
 # --------------------------------------------------
-npm install @openrouter/sdk
-npm install @openrouter/agent
+#npm install @openrouter/sdk
+#npm install @openrouter/agent
 npm install @openai/codex@latest
 curl -fsSL https://raw.githubusercontent.com/DeusData/codebase-memory-mcp/main/install.sh | bash || true
 curl -fsSL https://opencode.ai/install | bash || true
@@ -329,7 +329,7 @@ download_model() {
 
 
 if [ "${LEGACY_MODELS:-1}" = "1" ]; then
-download_model "https://huggingface.co/beznogim666/gonzalomo-krea-2/resolve/main/gonzalomoKrea2_v10.safetensors" "$COMFY/models/checkpoints/krea2.safetensors"
+#download_model "https://huggingface.co/beznogim666/gonzalomo-krea-2/resolve/main/gonzalomoKrea2_v10.safetensors" "$COMFY/models/checkpoints/krea2.safetensors"
 download_model "https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF/resolve/main/Huihui-Qwen3.8-27B-abliterated-bf16.gguf" "$COMFY/models/LLM/Huihui-Qwen3.8-27B-abliterated-bf16.gguf"
 #download_model "https://huggingface.co/orcarouter/Qwen3.8-27B-Uncensored-GGUF/resolve/main/Qwen3.8-27B-Uncensored-F16-00002-of-00002.gguf" "$COMFY/models/llm/Qwen3.8-27B-Uncensored-02-of-02.gguf"
 #download_model "https://huggingface.co/Phr00t/Qwen-Image-Edit-Rapid-AIO/resolve/main/v23/Qwen-Rapid-AIO-NSFW-v23.safetensors" "$COMFY/models/checkpoints/qwen-image.safetensors"
@@ -360,7 +360,7 @@ fi
 # --------------------------------------------------
 if command -v lms >/dev/null 2>&1; then
     lms daemon up || true
-    lms get HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF || true
+    #lms get HauhauCS/Qwen3.8-27B-Uncensored-HauhauCS-Aggressive-MTP-GGUF || true
 else
     echo "WARNING: lms command not found after install."
 fi
